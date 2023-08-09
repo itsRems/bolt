@@ -15,7 +15,8 @@
 		"dev": "lerna watch -- lerna run build --since",
 		"prereleaseOnly": "pinst --disable && echo '🚀  Publishing...'",
 		"release-stable": "lerna run build && lerna publish --no-private --yes --force-publish",
-		"postrelease": "pinst --enable && echo '🎉  Published!'"
+		"postrelease": "pinst --enable && echo '🎉  Published!'",
+		"copyreadme": "cp README.md packages/bolt-core/README.md && cp README.md packages/bolt-plexus/README.md && cp README.md packages/bolt-fastify/README.md"
 	},
 	"devDependencies": {
 		"@types/node": "^18.11.11",
