@@ -100,3 +100,6 @@ const response = await router.myRoute({
 console.log(response.message); // Hello Nico!
 ```
 
+## Alternatives
+
+- [TS-Rest](https://ts-rest.com/)
