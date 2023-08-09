@@ -1,0 +1,35 @@
+{
+	"name": "bolt-root",
+	"version": "1.0.0",
+	"repository": "git@github.com:itsRems/bolt",
+	"author": "Nicolas Theck <contact@itsrems.com>",
+	"license": "MIT",
+	"private": true,
+	"scripts": {
+		"postinstall": "test -n \"$NO_YARN_POSTINSTALL\" || yarn run build",
+		"core": "yarn workspace @bolt-ts/core",
+		"plexus": "yarn workspace @bolt-ts/plexus",
+		"fastify": "yarn workspace @bolt-ts/fastify",
+		"bootstrap": "lerna bootstrap --use-workspaces",
+		"build": "lerna run build",
+		"dev": "lerna watch -- lerna run build --since",
+		"prereleaseOnly": "pinst --disable && echo '🚀  Publishing...'",
+		"release-stable": "lerna run build && lerna publish --no-private --yes --force-publish",
+		"postrelease": "pinst --enable && echo '🎉  Published!'"
+	},
+	"devDependencies": {
+		"@types/node": "^18.11.11",
+		"lerna": "7.1.1",
+		"nodemon": "^2.0.15",
+		"nx": "16.5.1",
+		"typescript": "^5.1.6"
+	},
+	"workspaces": {
+		"packages": [
+			"packages/*"
+		]
+	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com"
+	}
+}

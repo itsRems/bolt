@@ -1,0 +1,19 @@
+{
+	"name": "@bolt-ts/plexus",
+	"version": "0.0.1",
+	"main": "./dist/index.js",
+	"types": "dist/index.d.ts",
+	"publishConfig": {
+		"access": "public"
+	},
+	"license": "MIT",
+	"scripts": {
+		"prebuild": "rimraf ./dist ./tsconfig.tsbuildinfo",
+		"build": "tsc --build --force",
+		"dev": "tsc --watch"
+	},
+	"dependencies": {
+		"@bolt-ts/core": "0.0.1",
+		"@plexusjs/napi": "^1.8.5"
+	}
+}

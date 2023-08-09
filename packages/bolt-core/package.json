@@ -1,0 +1,18 @@
+{
+	"name": "@bolt-ts/core",
+	"version": "0.0.1",
+	"main": "./dist/index.js",
+	"types": "dist/index.d.ts",
+	"publishConfig": {
+		"access": "public"
+	},
+	"license": "MIT",
+	"scripts": {
+		"prebuild": "rimraf ./dist ./tsconfig.tsbuildinfo",
+		"build": "tsc --build --force",
+		"dev": "tsc --watch"
+	},
+	"dependencies": {
+		"@bolt-ts/utils": "0.0.1"
+	}
+}
