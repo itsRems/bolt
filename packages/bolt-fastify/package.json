@@ -1,6 +1,6 @@
 {
 	"name": "@bolt-ts/fastify",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"main": "./dist/index.js",
 	"types": "dist/index.d.ts",
 	"publishConfig": {
@@ -13,8 +13,8 @@
 		"dev": "tsc --watch"
 	},
 	"dependencies": {
-		"@bolt-ts/core": "0.0.1",
-		"@bolt-ts/utils": "0.0.1",
+		"@bolt-ts/core": "0.0.2",
+		"@bolt-ts/utils": "0.0.2",
 		"fastify": "^4.21.0"
 	}
 }
