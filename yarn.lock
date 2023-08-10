@@ -438,25 +438,25 @@
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
-"@plexusjs/api@1.8.5":
-  version "1.8.5"
-  resolved "https://registry.yarnpkg.com/@plexusjs/api/-/api-1.8.5.tgz#a6605544f1f469f4a1905c4de20d391bd2ece805"
-  integrity sha512-pq2GyUblem0eVTBeCJP/XQS2qjITYBc8j7iQ/r7iN3HQ8sPtYMTx47mXeM2SUktok8EuAfV9Zn12DX75ZXzDrg==
+"@plexusjs/api@1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@plexusjs/api/-/api-1.9.1.tgz#2ec39200d360063b4c1fc1526e784d9c3443cfe8"
+  integrity sha512-734qc4+MQs1aDM95q+PLvsXHGWnPMByd8Bn69Q70p6CVbB5Wjzjs3WaP6Pe6JVq7X0PT+2nxkjCTIkxuvrxvpw==
   dependencies:
-    "@plexusjs/utils" "1.8.5"
+    "@plexusjs/utils" "1.9.1"
 
-"@plexusjs/napi@^1.8.5":
-  version "1.8.5"
-  resolved "https://registry.yarnpkg.com/@plexusjs/napi/-/napi-1.8.5.tgz#a3cac0a350be50ff826ca224b6faf14a6d2b3f71"
-  integrity sha512-Pe1+6rxA3Ob9xCzg8AZ+tqunimtFsvZ8+HyorN4ELoBak/HjwJV8A8+HcMyrs9kI7NZccFwe/429ZNi973SgWg==
+"@plexusjs/napi@^1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@plexusjs/napi/-/napi-1.9.1.tgz#826abb6204bca7a5fb0f2f2ae3130e54e5ad920a"
+  integrity sha512-v8LmYahs+4rgOahzeZzXuqauc5HNK0PQ3gummSNXaAF1tLsK/gFS7rt5dQWDFOGSeeLPciHdxgmPdfM2xQom+g==
   dependencies:
-    "@plexusjs/api" "1.8.5"
+    "@plexusjs/api" "1.9.1"
     cross-fetch "^3.1.5"
 
-"@plexusjs/utils@1.8.5":
-  version "1.8.5"
-  resolved "https://registry.yarnpkg.com/@plexusjs/utils/-/utils-1.8.5.tgz#31f95b3d9fef5a2dfb49fbefa1b5b5d5fe0f4c7f"
-  integrity sha512-qLuHRR+HoVxoyrRwUzxYDHeFWtw+nv8SxDJM8sL51HeczcmiF254TCJ52tFDoBzVrEaV1Nny7J96ypcqbgRJuw==
+"@plexusjs/utils@1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@plexusjs/utils/-/utils-1.9.1.tgz#ab7b58760b06de9e1b6b507d76d7c56cd70d5d0a"
+  integrity sha512-6CB2U5X5AuhhUy9xj73IpWyu4wqIf82UJlSR0yOJPL6ol/wpPZgbdyeUdz9Jo/v8zmGCJPAW1wDWxZSpkrVQyw==
 
 "@sigstore/bundle@^1.0.0":
   version "1.0.0"

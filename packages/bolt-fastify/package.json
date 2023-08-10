@@ -14,7 +14,9 @@
 	},
 	"dependencies": {
 		"@bolt-ts/core": "0.0.2",
-		"@bolt-ts/utils": "0.0.2",
-		"fastify": "^4.21.0"
+		"@bolt-ts/utils": "0.0.2"
+	},
+	"peerDependencies": {
+		"fastify": "^4.0.0"
 	}
 }
