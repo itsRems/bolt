@@ -23,7 +23,7 @@ yarn add @bolt-ts/fastify
 
 > Plexus (you'll need at least one client implementation)
 ```bash
-yarn add @bolt-ts/plexus
+yarn add @bolt-ts/plexus @plexusjs/napi
 ```
 
 ## Basic usage

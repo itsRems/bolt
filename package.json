@@ -19,6 +19,7 @@
 		"copyreadme": "cp README.md packages/bolt-core/README.md && cp README.md packages/bolt-plexus/README.md && cp README.md packages/bolt-fastify/README.md"
 	},
 	"devDependencies": {
+		"@plexusjs/napi": "^1.9.2",
 		"@types/node": "^18.11.11",
 		"fastify": "^4.21.0",
 		"lerna": "7.1.1",

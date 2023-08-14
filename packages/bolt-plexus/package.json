@@ -13,7 +13,10 @@
 		"dev": "tsc --watch"
 	},
 	"dependencies": {
-		"@bolt-ts/core": "0.0.5",
-		"@plexusjs/napi": "^1.9.2"
+		"@bolt-ts/core": "0.0.5"
+	},
+	"peerDependencies": {
+		
+		"@plexusjs/napi": "^1.0.0"
 	}
 }

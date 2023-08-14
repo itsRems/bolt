@@ -5,6 +5,8 @@
 ![npm total downloads](https://img.shields.io/npm/dt/@bolt-ts/core?style=flat)
 ![bundle size](https://img.shields.io/bundlephobia/min/@bolt-ts/core?style=flat)
 
+> Bolt is in early development. Expect breaking changes until v1.0.0, and use at your own risk.
+
 # Getting started
 
 ## Installation
@@ -21,7 +23,7 @@ yarn add @bolt-ts/fastify
 
 > Plexus (you'll need at least one client implementation)
 ```bash
-yarn add @bolt-ts/plexus
+yarn add @bolt-ts/plexus @plexusjs/napi
 ```
 
 ## Basic usage
@@ -98,3 +100,6 @@ const response = await router.myRoute({
 console.log(response.message); // Hello Nico!
 ```
 
+## Alternatives
+
+- [TS-Rest](https://ts-rest.com/)
