@@ -64,7 +64,7 @@ export class BoltServer<T extends RouterRecord> {
     const routePaths = Array.from(this.routes).map((route) => handlerKey(route));
     const uniqueRoutePaths = new Set(routePaths);
     if (routePaths.length !== uniqueRoutePaths.size) {
-      throw new Error(`Duplicate routes detected: ${routePaths}`);
+      throw new Error(`Duplicate routes: ${routePaths.filter((route, index) => routePaths.indexOf(route) !== index)}`);
     }
 
     if (checkHandlers) {
