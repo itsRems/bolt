@@ -1,6 +1,6 @@
 import { RouteBuilder, RouteParams, RouteSettings, RouterRecord, UnsetMarker, getParseFn } from '@bolt-ts/core';
 
-import { ApiInstance, PlexusApiRes } from '@plexusjs/napi';
+import { ApiInstance, PlexusApiFetchOptions, PlexusApiRes, PlexusApiSendOptions } from '@plexusjs/napi';
 
 type StringParamToObject<P extends string> = P extends `${infer _Prefix}:${infer Param}/${infer Rest}`
   ? { [K in Param]: string | number } & StringParamToObject<Rest>
@@ -52,7 +52,9 @@ export type IOutput<TParams extends RouteParams> = TParams['_output_out'] extend
   ? undefined
   : TParams['_output_out'];
 
-export type IMappedOptions<TParams extends RouteParams> = IParams<TParams> & IQuery<TParams> & IBody<TParams>;
+export type IMappedOptions<TParams extends RouteParams> = IParams<TParams> & IQuery<TParams> & IBody<TParams> & {
+  headers?: PlexusApiFetchOptions['headers']
+};
 
 export type PlexusMappedRoute<TParams extends RouteParams> = (
   params: IMappedOptions<TParams>
@@ -92,7 +94,7 @@ export function boltRouteToPlexus<TParams extends RouteParams>(
   route: RouteBuilder<TParams>,
   options?: RouteSettings
 ): PlexusMappedRoute<TParams> {
-  return async ({ params, query, body }) => {
+  return async ({ params, query, body, headers }) => {
     const method = `${route._def.method ?? 'get'}`?.toLowerCase() as ['get', 'post', 'put', 'patch', 'delete'][number];
 
     // Build path
@@ -167,15 +169,15 @@ export function boltRouteToPlexus<TParams extends RouteParams>(
 
     switch (method) {
       case 'get':
-        return api.get<IOutput<TParams>>(path, query ?? {});
+        return api.get<IOutput<TParams>>(path, query ?? {}, { headers });
       case 'post':
-        return api.post<IOutput<TParams>>(path, body ?? {});
+        return api.post<IOutput<TParams>>(path, body ?? {}, { headers });
       case 'put':
-        return api.put<IOutput<TParams>>(path, body ?? {});
+        return api.put<IOutput<TParams>>(path, body ?? {}, { headers });
       case 'patch':
-        return api.patch<IOutput<TParams>>(path, body ?? {});
+        return api.patch<IOutput<TParams>>(path, body ?? {}, { headers });
       case 'delete':
-        return api.delete<IOutput<TParams>>(path);
+        return api.delete<IOutput<TParams>>(path, {}, { headers });
     }
   };
 }

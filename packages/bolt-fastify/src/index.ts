@@ -119,6 +119,28 @@ export class BoltServer<T extends RouterRecord> {
           }
         },
         handler: this.handlers.get(handlerKey(route)) as any,
+        onSend: async (request, reply, payload) => {
+          if (typeof payload === 'string') {
+            console.log('got payload', payload.slice(0, 100))
+            const pickKey = Object.keys(request.headers).find((header) => header.toLowerCase() === 'x-bolt-pick');
+            const pickHeader = request.headers[pickKey ?? 'x-bolt-pick'];
+            // JSON !
+            // If we have a pick header, pick the fields
+            if (pickHeader) {
+              console.log('got pick header', pickHeader)
+              try {
+                const picking = JSON.parse(pickHeader as string);
+                if (Array.isArray(picking)) {
+                  const data = JSON.parse(payload) as any;
+                  return JSON.stringify(picking.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}));
+                }
+              } catch (error) {
+                console.error('failed to parse payload', error)
+              }
+            }
+          }
+          return payload;
+        }
       });
     }
   }
