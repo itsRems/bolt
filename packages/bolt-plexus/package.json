@@ -16,6 +16,6 @@
 		"@bolt-ts/core": "0.0.7"
 	},
 	"peerDependencies": {
-		"@plexusjs/napi": "^1.0.0"
+		"@plexusjs/napi": "^1.10.3"
 	}
 }

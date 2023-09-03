@@ -438,25 +438,25 @@
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
-"@plexusjs/api@1.9.2":
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/@plexusjs/api/-/api-1.9.2.tgz#3d1da9006ca43924cfcddcca1ea22d32831910fa"
-  integrity sha512-nguTncGzhUpPYw9veJUc0Xx57GtbcZiRzFlTDiRUlsrZ4PvOhYMguanimBE7sRmBaPSPBeUIiqr4yJhVyFSikg==
+"@plexusjs/api@1.10.3":
+  version "1.10.3"
+  resolved "https://registry.yarnpkg.com/@plexusjs/api/-/api-1.10.3.tgz#32e367333f7a0ab50a4238bad62fed3bfa2f42a0"
+  integrity sha512-6OdcOA4eUFDnFcpr+Ct9AR3TNvyBtKW3VKQCi/vPzx0uqMCaXr9lgVdNY4TizC1uqQMobevQqVEY9Q1TI0gjWg==
   dependencies:
-    "@plexusjs/utils" "1.9.2"
+    "@plexusjs/utils" "1.10.3"
 
-"@plexusjs/napi@^1.9.2":
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/@plexusjs/napi/-/napi-1.9.2.tgz#11ad7fce4c09537eab233ff14128aa202f8a3bb8"
-  integrity sha512-hGfwADuJE5IS4PyFzGEKr/CMIkL0nuWyVaLP/Cy7jGmdfZPhOSfs5J0MbAJIow+urCjn7fdG1mg7/9leDPo1TQ==
+"@plexusjs/napi@^1.10.3":
+  version "1.10.3"
+  resolved "https://registry.yarnpkg.com/@plexusjs/napi/-/napi-1.10.3.tgz#b233b884c614df3159a8da2ecdb73d10830ec4de"
+  integrity sha512-uG3Grl/+dLsAstgVrZCg7kLirlQ82c5e47UNjZlMzk/M0yv7ZGtDljSBoOfcbS3cQKl572HFlJGw5nGDSEfiLw==
   dependencies:
-    "@plexusjs/api" "1.9.2"
+    "@plexusjs/api" "1.10.3"
     cross-fetch "^3.1.5"
 
-"@plexusjs/utils@1.9.2":
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/@plexusjs/utils/-/utils-1.9.2.tgz#d406d7d0f7f021607e9fbc40f0ad09b56291cba4"
-  integrity sha512-yn0kUFuU1HUzQSHM5R/omhPfSvb99HP1Gis+/3DeriT1U1YUfZZb315ZXS6mPf9LLuCBPealRPFqQSjD4dD5Ag==
+"@plexusjs/utils@1.10.3":
+  version "1.10.3"
+  resolved "https://registry.yarnpkg.com/@plexusjs/utils/-/utils-1.10.3.tgz#db27474e18de5aa6ba402015edd4d0850b2d6c68"
+  integrity sha512-NtKRwGSt3tFoOD8HE1IOm9SiKEdgF3EneyU2sVaIqjQgWtq3zz/i7EGj0rGfNcOlNNz60ded1Zt7X8hFRoinxw==
 
 "@sigstore/bundle@^1.0.0":
   version "1.0.0"
