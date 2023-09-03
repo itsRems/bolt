@@ -1,8 +1,10 @@
-import { PlexusMappedRoute } from '.';
+import { RouteParams } from '@bolt-ts/core';
+import { IOutput, PlexusMappedRoute } from '.';
 
-export function pick <T extends PlexusMappedRoute<any>, F = Partial<Awaited<ReturnType<T>>['data']>> (route: T, fields: F): T {
-  // @ts-ignore
-  return async (params: Parameters<T>[0]) => {
+// todo: add support for array picking
+
+export function pick <T extends RouteParams, F = Array<keyof IOutput<T>>> (route: PlexusMappedRoute<T>, fields: F): PlexusMappedRoute<T> {
+  return async (params: Parameters<PlexusMappedRoute<T>>[0]) => {
     return route({
       ...params,
       headers: {
