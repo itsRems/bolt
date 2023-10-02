@@ -5,6 +5,7 @@ export interface RouteSettings {
   validateQuery?: boolean;
   validateBody?: boolean;
   validateParams?: boolean;
+  fastifyConfig?: Record<string, any>;
 }
 
 export interface RouteConfigTypes {
