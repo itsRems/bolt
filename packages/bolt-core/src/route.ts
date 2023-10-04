@@ -284,8 +284,29 @@ export type AnyRoute = AnyRouteBuilder;
  * @returns a function that creates routes with the given prefix
  */
 export function prefixer<P extends string>(prefix: P) {
-  return <TParams extends RouteParams, N extends string>(path: N) => {
+  const fn = <TParams extends RouteParams, N extends string>(path: N) => {
     const builder = route<TParams, `${P}${N}`>(path as `${P}${N}`);
     return builder.path(`${prefix}${path}`).method('GET');
   };
+  fn.get = <TParams extends RouteParams, N extends string>(path: N) => {
+    const builder = route<TParams, `${P}${N}`>(path as `${P}${N}`);
+    return builder.path(`${prefix}${path}`).method('GET');
+  }
+  fn.post = <TParams extends RouteParams, N extends string>(path: N) => {
+    const builder = route<TParams, `${P}${N}`>(path as `${P}${N}`);
+    return builder.path(`${prefix}${path}`).method('POST');
+  }
+  fn.patch = <TParams extends RouteParams, N extends string>(path: N) => {
+    const builder = route<TParams, `${P}${N}`>(path as `${P}${N}`);
+    return builder.path(`${prefix}${path}`).method('PATCH');
+  }
+  fn.put = <TParams extends RouteParams, N extends string>(path: N) => {
+    const builder = route<TParams, `${P}${N}`>(path as `${P}${N}`);
+    return builder.path(`${prefix}${path}`).method('PUT');
+  }
+  fn.delete = <TParams extends RouteParams, N extends string>(path: N) => {
+    const builder = route<TParams, `${P}${N}`>(path as `${P}${N}`);
+    return builder.path(`${prefix}${path}`).method('DELETE');
+  }
+  return fn;
 }

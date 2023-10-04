@@ -1,4 +1,4 @@
-export type RestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+export type RestMethod = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
 
 export const unsetMarker = Symbol('unsetMarker');
 
