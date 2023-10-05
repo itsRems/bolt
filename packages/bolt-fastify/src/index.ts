@@ -88,6 +88,7 @@ export class BoltServer<T extends RouterRecord> {
         continue;
       }
       this.server.route({
+        ...(route._def.settings.fastifyOptions ?? {}),
         method: route._def.method ?? 'GET',
         url: route._def.path as string,
         ...route._def.settings?.fastifyConfig && {

@@ -6,6 +6,7 @@ export interface RouteSettings {
   validateBody?: boolean;
   validateParams?: boolean;
   fastifyConfig?: Record<string, any>;
+  fastifyOptions?: Record<string, any>;
 }
 
 export interface RouteConfigTypes {
