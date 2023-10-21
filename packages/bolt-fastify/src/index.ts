@@ -89,11 +89,11 @@ export class BoltServer<T extends RouterRecord> {
       }
       this.server.route({
         ...(route._def.settings?.fastifyOptions ?? {}),
-        method: route._def.method ?? 'GET',
-        url: route._def.path as string,
         ...route._def.settings?.fastifyConfig && {
           config: route._def.settings.fastifyConfig,
         },
+        method: route._def.method ?? 'GET',
+        url: route._def.path as string,
         preHandler: async (req, res) => {
           try {
             if (route._def.settings?.validateQuery && route._def.query) {
