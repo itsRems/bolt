@@ -1,9 +1,11 @@
-type RouterRecordValue<T> = T | RouterRecord<T>;
+type NestedRouterRecord<T> = {
+  [key in keyof T]: T[key] extends infer U ? U extends RouterRecord ? NestedRouterRecord<U> : U : never;
+};
 
-export interface RouterRecord<T = any> {
-  [key: string]: RouterRecordValue<T>;
+export interface RouterRecord {
+  [key: string]: RouterRecord | NestedRouterRecord<RouterRecord>;
 }
 
-export function createRouter<T extends RouterRecord>(router: T): T {
-  return router;
+export function createRouter<T extends RouterRecord>(router: T): NestedRouterRecord<T> {
+  return router as NestedRouterRecord<T>;
 }
