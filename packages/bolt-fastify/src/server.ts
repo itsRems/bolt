@@ -1,4 +1,4 @@
-import { AnyRoute, RouteBuilder, RouteParams, getParseFn } from '@bolt-ts/core';
+import { AnyRoute, RouteBuilder, RouteParams, RouterRecord, getParseFn } from '@bolt-ts/core';
 import { AnyRouteHandler } from './types';
 import fastify, { FastifyListenOptions } from 'fastify';
 import { BoltModule } from './module';
@@ -8,8 +8,15 @@ function handlerKey<TParams extends RouteParams>(route: RouteBuilder<TParams>) {
 }
 
 export class BoltServer {
-  constructor(public modules: BoltModule<any>[], public server = fastify()) {
+  public modules: BoltModule<any>[] = [];
+  constructor(public server = fastify()) {
     this.validateRoutes();
+  }
+
+  public addModule<T extends RouterRecord>(router: T) {
+    const module = new BoltModule(this, router);
+    this.modules.push(module);
+    return module;
   }
 
   validateRoutes(checkHandlers = false) {
