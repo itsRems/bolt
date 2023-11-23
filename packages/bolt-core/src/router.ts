@@ -6,6 +6,6 @@ export interface RouterRecord {
   [key: string]: RouterRecord | NestedRouterRecord<RouterRecord>;
 }
 
-export function createRouter<T extends RouterRecord>(router: T): NestedRouterRecord<T> {
-  return router as NestedRouterRecord<T>;
+export function createRouter<T extends RouterRecord>(router: T): T {
+  return router ;
 }
