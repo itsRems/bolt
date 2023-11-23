@@ -8,3 +8,11 @@ export type UnsetMarker = typeof unsetMarker;
 export type Simplify<TType> = TType extends any[] | Date ? TType : { [K in keyof TType]: TType[K] };
 
 export type OverwriteIfDefined<TType, TWith> = UnsetMarker extends TType ? TWith : Simplify<TType & TWith>;
+
+export declare const tag: unique symbol;
+
+export declare type Tagged<Token> = {
+  readonly [tag]: Token;
+};
+
+export type Opaque<Type, Token = unknown> = Type & Tagged<Token>;
