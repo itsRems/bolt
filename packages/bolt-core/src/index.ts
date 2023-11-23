@@ -8,6 +8,14 @@ export interface RouterRecord {
   [key: string]: AnyRoute | RouterRecord;
 }
 
-export function createRouter<T extends RouterRecord>(router: T) {
-  return router;
+declare const tag: unique symbol;
+
+declare type Tagged<Token> = {
+  readonly [tag]: Token;
+};
+
+export type Opaque<Type, Token = unknown> = Type & Tagged<Token>;
+
+export function createRouter<N extends string, T extends RouterRecord>(name: N, router: T): Opaque<T, N> {
+  return router as Opaque<T, N>;
 }
