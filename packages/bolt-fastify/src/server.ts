@@ -8,7 +8,7 @@ function handlerKey<TParams extends RouteParams>(route: RouteBuilder<TParams>) {
 }
 
 export class BoltServer {
-  constructor(public server = fastify(), public modules: BoltModule<any>[]) {
+  constructor(public modules: BoltModule<any>[], public server = fastify()) {
     this.validateRoutes();
   }
 
