@@ -93,14 +93,26 @@ export class BoltServer {
   }
 
   public get handlers () {
-    return new Map<string, AnyRouteHandler>(this.modules.reduce((handlers, module) => {
-      return [...handlers, ...Array.from(module.handlers.entries())]
-    }, [] as [string, AnyRouteHandler][]))
+    const handlers = new Map<string, AnyRouteHandler>()
+
+    for (const module of this.modules) {
+      for (const [key, value] of module.handlers.entries()) {
+        handlers.set(key, value)
+      }
+    }
+
+    return handlers
   }
 
   public get routes () {
-    return new Set<AnyRoute>(this.modules.reduce((routes, module) => {
-      return [...routes, ...Array.from(module.routes)]
-    }, [] as AnyRoute[]))
+    const routes = new Set<AnyRoute>()
+
+    for (const module of this.modules) {
+      for (const route of module.routes) {
+        routes.add(route)
+      }
+    }
+
+    return routes
   }
 }
