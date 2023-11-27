@@ -5,6 +5,7 @@ export interface RouteSettings {
   validateQuery?: boolean;
   validateBody?: boolean;
   validateParams?: boolean;
+  validateResponse?: boolean;
   fastifyConfig?: Record<string, any>;
   fastifyOptions?: Record<string, any>;
 }
@@ -217,6 +218,12 @@ function createNewBuilder(d1: AnyRouteBuilderDef, d2: Partial<AnyRouteBuilderDef
 export function createBuilder<TParams extends RouteParams>(init: RouteBuilderDef<TParams>): RouteBuilder<TParams> {
   const _def: AnyRouteBuilderDef = {
     ...init,
+    settings: init.settings ?? {
+      validateBody: true,
+      validateParams: true,
+      validateQuery: true,
+      validateResponse: true,
+    },
   };
 
   return {

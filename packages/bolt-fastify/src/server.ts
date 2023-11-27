@@ -82,6 +82,23 @@ export class BoltServer {
             return res.status(400).send(error);
           }
         },
+        onSend: async (req, res, payload) => {
+          try {
+            if (route._def.settings?.validateResponse && route._def.output) {
+              let parseFn: ((input: any) => any | Promise<any>) | undefined = undefined;
+              try {
+                parseFn = getParseFn(route._def.output);
+              } catch (error) {
+                // silent fail (we didn't find a parse function)
+              }
+              if (parseFn) {
+                return await parseFn(payload);
+              }
+            }
+          } catch (error) {
+            return res.status(500).send(error);
+          }
+        },
         handler: this.handlers.get(handlerKey(route)) as any,
       });
     }
