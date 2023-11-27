@@ -82,26 +82,23 @@ export class BoltServer {
             return res.status(400).send(error);
           }
         },
-        onSend: async (req, res, payload) => {
-          try {
-            if (route._def.settings?.validateResponse && route._def.output) {
-              let parseFn: ((input: any) => any | Promise<any>) | undefined = undefined;
-              try {
-                parseFn = getParseFn(route._def.output);
-              } catch (error) {
-                // silent fail (we didn't find a parse function)
-              }
-              if (parseFn) {
-                // only handle JSON for now
-                if ((res.getHeader('content-type') as string).startsWith('application/json')) {
-                  const parsed = await parseFn(JSON.parse(payload as string));
-                  return JSON.stringify(parsed);
-                }
+        onSend: async (req, res, payload, done) => {
+          if (route._def.settings?.validateResponse && route._def.output) {
+            let parseFn: ((input: any) => any | Promise<any>) | undefined = undefined;
+            try {
+              parseFn = getParseFn(route._def.output);
+            } catch (error) {
+              // silent fail (we didn't find a parse function)
+            }
+            if (parseFn) {
+              // only handle JSON for now
+              if ((res.getHeader('content-type') as string).startsWith('application/json')) {
+                const parsed = await parseFn(JSON.parse(payload as string));
+                return done(null, JSON.stringify(parsed));
               }
             }
-          } catch (error) {
-            return res.status(500).send(error);
           }
+          return done(null, payload);
         },
         handler: this.handlers.get(handlerKey(route)) as any,
       });
