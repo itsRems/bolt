@@ -220,8 +220,8 @@ export function createBuilder<TParams extends RouteParams>(init: RouteBuilderDef
     ...init,
     settings: init.settings ?? {
       validateBody: true,
-      validateParams: true,
-      validateQuery: true,
+      validateParams: false,
+      validateQuery: false,
       validateResponse: true,
     },
   };
