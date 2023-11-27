@@ -92,6 +92,7 @@ export class BoltServer {
                 // silent fail (we didn't find a parse function)
               }
               if (parseFn) {
+                console.log(res.getHeader('content-type'));
                 // only handle JSON for now
                 if (res.getHeader('content-type') === 'application/json') {
                   const parsed = await parseFn(JSON.parse(payload as string));
