@@ -219,10 +219,10 @@ export function createBuilder<TParams extends RouteParams>(init: RouteBuilderDef
   const _def: AnyRouteBuilderDef = {
     ...init,
     settings: init.settings ?? {
-      validateBody: true,
+      validateBody: false,
       validateParams: false,
       validateQuery: false,
-      validateResponse: true,
+      validateResponse: false,
     },
   };
 
