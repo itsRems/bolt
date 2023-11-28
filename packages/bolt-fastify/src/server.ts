@@ -82,7 +82,7 @@ export class BoltServer {
             return res.status(400).send(error);
           }
         },
-        onSend: async (req, res, payload, done) => {
+        onSend: async (req, res, payload) => {
           if (route._def.settings?.validateResponse && route._def.output) {
             let parseFn: ((input: any) => any | Promise<any>) | undefined = undefined;
             try {
@@ -94,11 +94,11 @@ export class BoltServer {
               // only handle JSON for now
               if ((res.getHeader('content-type') as string).startsWith('application/json')) {
                 const parsed = await parseFn(JSON.parse(payload as string));
-                return done(null, JSON.stringify(parsed));
+                return JSON.stringify(parsed)
               }
             }
           }
-          return done(null, payload);
+          return payload
         },
         handler: this.handlers.get(handlerKey(route)) as any,
       });
