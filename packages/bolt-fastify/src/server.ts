@@ -28,16 +28,14 @@ export class BoltServer {
     }
 
     if (checkHandlers) {
-      // Check for unregistered handlers
-      this.routes.forEach((route) => {
-        if (!this.handlers.has(handlerKey(route))) {
-          throw new Error(
-            `Route handler not registered for route: ${`${route._def.method ?? 'get'}`.toUpperCase()} ${
-              route._def.path
-            }`
-          );
-        }
-      });
+      const unregisteredHandlers = [...this.routes].filter((route) => !this.handlers.has(handlerKey(route)));
+      if (unregisteredHandlers.length) {
+        throw new Error(
+          `Route handlers not registered for routes: ${unregisteredHandlers
+            .map((route) => `${`${route._def.method ?? 'get'}`.toUpperCase()} ${route._def.path}`)
+            .join(', ')}`
+        );
+      }
     }
   }
 
