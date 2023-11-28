@@ -93,6 +93,8 @@ export class BoltServer {
             if (parseFn) {
               // only handle JSON for now
               if ((res.getHeader('content-type') as string).startsWith('application/json')) {
+                console.log(payload)
+                console.log(JSON.parse(payload as string))
                 const parsed = await parseFn(JSON.parse(payload as string));
                 return JSON.stringify(parsed)
               }
