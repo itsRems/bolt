@@ -1,7 +1,6 @@
-import { AnyRoute, RouteBuilder, RouteParams, RouterRecord, getParseFn } from '@bolt-ts/core';
+import { AnyRoute, RouteBuilder, RouteParams, RouterRecord } from '@bolt-ts/core';
 import { MaybeArray, deepFind, flattenObject } from '@bolt-ts/utils';
 
-import fastify, { FastifyListenOptions, RouteHandler as FastifyRouteHandler } from 'fastify';
 import { AnyRouteHandler, RouterHandlerMapper } from './types';
 import { BoltServer } from './server';
 
@@ -13,9 +12,9 @@ export class BoltModule<T extends RouterRecord> {
   public handlers = new Map<string, AnyRouteHandler>();
   public routes = new Set<AnyRoute>();
 
-  constructor(public server: BoltServer, public router: T) {
+  constructor(public router: T, public server?: BoltServer) {
     this.registerRoutes(router);
-    this.server.validateRoutes();
+    this.server?.validateRoutes();
   }
 
   registerRoutes(routes: MaybeArray<AnyRoute> | RouterRecord, validate = false) {
@@ -27,7 +26,7 @@ export class BoltModule<T extends RouterRecord> {
       Object.values(routes).forEach((route) => this.registerRoutes(route));
     }
     if (validate) {
-      this.server.validateRoutes();
+      this.server?.validateRoutes();
     }
   }
 

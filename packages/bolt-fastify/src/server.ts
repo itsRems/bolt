@@ -14,7 +14,13 @@ export class BoltServer {
   }
 
   public addModule<T extends RouterRecord>(router: T) {
-    const module = new BoltModule(this, router);
+    const module = new BoltModule(router, this);
+    this.modules.push(module);
+    return module;
+  }
+
+  public addDetachedModule<T extends RouterRecord>(module: BoltModule<T>) {
+    module.server = this;
     this.modules.push(module);
     return module;
   }
