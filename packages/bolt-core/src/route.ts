@@ -263,7 +263,7 @@ export function createBuilder<TParams extends RouteParams>(init: RouteBuilderDef
   };
 }
 
-export function route<TParams extends RouteParams, N extends string>(
+export function createRoute<TParams extends RouteParams, N extends string>(
   path: N
 ): RouteBuilder<{
   _path: N;
@@ -293,28 +293,38 @@ export type AnyRoute = AnyRouteBuilder;
  */
 export function prefixer<P extends string>(prefix: P) {
   const fn = <TParams extends RouteParams, N extends string>(path: N) => {
-    const builder = route<TParams, `${P}${N}`>(path as `${P}${N}`);
+    const builder = createRoute<TParams, `${P}${N}`>(path as `${P}${N}`);
     return builder.path(`${prefix}${path}`).method('GET');
   };
   fn.get = <TParams extends RouteParams, N extends string>(path: N) => {
-    const builder = route<TParams, `${P}${N}`>(path as `${P}${N}`);
+    const builder = createRoute<TParams, `${P}${N}`>(path as `${P}${N}`);
     return builder.path(`${prefix}${path}`).method('GET');
   }
   fn.post = <TParams extends RouteParams, N extends string>(path: N) => {
-    const builder = route<TParams, `${P}${N}`>(path as `${P}${N}`);
+    const builder = createRoute<TParams, `${P}${N}`>(path as `${P}${N}`);
     return builder.path(`${prefix}${path}`).method('POST');
   }
   fn.patch = <TParams extends RouteParams, N extends string>(path: N) => {
-    const builder = route<TParams, `${P}${N}`>(path as `${P}${N}`);
+    const builder = createRoute<TParams, `${P}${N}`>(path as `${P}${N}`);
     return builder.path(`${prefix}${path}`).method('PATCH');
   }
   fn.put = <TParams extends RouteParams, N extends string>(path: N) => {
-    const builder = route<TParams, `${P}${N}`>(path as `${P}${N}`);
+    const builder = createRoute<TParams, `${P}${N}`>(path as `${P}${N}`);
     return builder.path(`${prefix}${path}`).method('PUT');
   }
   fn.delete = <TParams extends RouteParams, N extends string>(path: N) => {
-    const builder = route<TParams, `${P}${N}`>(path as `${P}${N}`);
+    const builder = createRoute<TParams, `${P}${N}`>(path as `${P}${N}`);
     return builder.path(`${prefix}${path}`).method('DELETE');
   }
   return fn;
 }
+
+/**
+ * Route function maker providing shorthand methods for each HTTP method.
+ */
+export function route<N extends string>(
+  path: N
+){
+  return prefixer('')(path);
+}
+
