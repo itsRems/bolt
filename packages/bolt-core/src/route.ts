@@ -322,9 +322,4 @@ export function prefixer<P extends string>(prefix: P) {
 /**
  * Route function maker providing shorthand methods for each HTTP method.
  */
-export function route<N extends string>(
-  path: N
-){
-  return prefixer('')(path);
-}
-
+export const route = prefixer('');
