@@ -2,3 +2,4 @@ node_modules
 .turbo
 .vscode
 dist
+.DS_Store
