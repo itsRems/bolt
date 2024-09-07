@@ -1,9 +1,15 @@
-import { IMappedOptions } from '@bolt-ts/core';
-import { IOutput } from '@bolt-ts/core';
-import { RouteBuilder, RouteParams, RouteSettings, RouterRecord, UnsetMarker, getParseFn } from '@bolt-ts/core';
+import { encodeQueryParams, IMappedOptions } from "@bolt-ts/core";
+import { IOutput } from "@bolt-ts/core";
+import {
+  RouteBuilder,
+  RouteParams,
+  RouteSettings,
+  RouterRecord,
+  UnsetMarker,
+  getParseFn,
+} from "@bolt-ts/core";
 
-import { ApiInstance, PlexusApiRes } from '@plexusjs/napi';
-
+import { ApiInstance, PlexusApiRes } from "@plexusjs/napi";
 
 export type PlexusMappedRoute<TParams extends RouteParams> = (
   params: IMappedOptions<TParams>
@@ -44,17 +50,24 @@ export function boltRouteToPlexus<TParams extends RouteParams>(
   options?: RouteSettings
 ): PlexusMappedRoute<TParams> {
   return async ({ params, query, body }) => {
-    const method = `${route._def.method ?? 'get'}`?.toLowerCase() as ['get', 'post', 'put', 'patch', 'delete'][number];
+    const method = `${route._def.method ?? "get"}`?.toLowerCase() as [
+      "get",
+      "post",
+      "put",
+      "patch",
+      "delete"
+    ][number];
 
     // Build path
     let path = route._def.path as string;
     // Handle route params
-    if (path.includes(':')) {
-      const pathParts = path.split('/');
+    if (path.includes(":")) {
+      const pathParts = path.split("/");
       const paramParts = Object.keys(params ?? {});
 
       if (options?.validateParams && route._def.params) {
-        let parseFn: ((input: any) => any | Promise<any>) | undefined = undefined;
+        let parseFn: ((input: any) => any | Promise<any>) | undefined =
+          undefined;
         try {
           parseFn = getParseFn(route._def.params);
         } catch (error) {
@@ -66,7 +79,7 @@ export function boltRouteToPlexus<TParams extends RouteParams>(
       }
 
       for (const [index, part] of pathParts.entries()) {
-        if (part.startsWith(':')) {
+        if (part.startsWith(":")) {
           const paramName = part.slice(1);
           if (!paramParts.includes(paramName)) {
             throw new Error(`Missing param: ${paramName}`);
@@ -78,15 +91,16 @@ export function boltRouteToPlexus<TParams extends RouteParams>(
         }
       }
 
-      path = pathParts.join('/');
+      path = pathParts.join("/");
     }
     // Handle query parameters
-    if (method !== 'get') {
-      path += '?';
+    if (method !== "get") {
+      path += "?";
       const queryParts = Object.keys(query ?? {});
 
       if (options?.validateQuery && route._def.query) {
-        let parseFn: ((input: any) => any | Promise<any>) | undefined = undefined;
+        let parseFn: ((input: any) => any | Promise<any>) | undefined =
+          undefined;
         try {
           parseFn = getParseFn(route._def.query);
         } catch (error) {
@@ -117,15 +131,23 @@ export function boltRouteToPlexus<TParams extends RouteParams>(
     }
 
     switch (method) {
-      case 'get':
-        return api.get<IOutput<TParams>>(path, query ?? {});
-      case 'post':
+      case "get":
+        return api.get<IOutput<TParams>>(
+          path,
+          query
+            ? encodeQueryParams(
+                query as Record<string, string>,
+                route._def.settings?.queryEncoder
+              )
+            : {}
+        );
+      case "post":
         return api.post<IOutput<TParams>>(path, body ?? {});
-      case 'put':
+      case "put":
         return api.put<IOutput<TParams>>(path, body ?? {});
-      case 'patch':
+      case "patch":
         return api.patch<IOutput<TParams>>(path, body ?? {});
-      case 'delete':
+      case "delete":
         return api.delete<IOutput<TParams>>(path);
     }
   };

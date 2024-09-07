@@ -1,11 +1,12 @@
-import { Parser, inferParser } from './parsing';
-import { RestMethod } from './types';
+import { Parser, inferParser } from "./parsing";
+import { BoltQueryEncoder, RestMethod } from "./types";
 
 export interface RouteSettings {
   validateQuery?: boolean;
   validateBody?: boolean;
   validateParams?: boolean;
   validateResponse?: boolean;
+  queryEncoder?: BoltQueryEncoder;
   fastifyConfig?: Record<string, any>;
   fastifyOptions?: Record<string, any>;
 }
@@ -33,16 +34,16 @@ export interface RouteParams<
   _method: M;
   _settings: C;
 
-  _headers_in: T['headers_in'];
-  _headers_out: T['headers_out'];
-  _query_in: T['query_in'];
-  _query_out: T['query_out'];
-  _params_in: T['params_in'];
-  _params_out: T['params_out'];
-  _body_in: T['body_in'];
-  _body_out: T['body_out'];
-  _output_in: T['output_in'];
-  _output_out: T['output_out'];
+  _headers_in: T["headers_in"];
+  _headers_out: T["headers_out"];
+  _query_in: T["query_in"];
+  _query_out: T["query_out"];
+  _params_in: T["params_in"];
+  _params_out: T["params_out"];
+  _body_in: T["body_in"];
+  _body_out: T["body_out"];
+  _output_in: T["output_in"];
+  _output_out: T["output_out"];
 }
 
 export type RouteBuilderDef<TParams extends RouteParams> = {
@@ -65,157 +66,162 @@ export interface RouteBuilder<TParams extends RouteParams> {
     path: N
   ): RouteBuilder<{
     _path: N;
-    _method: TParams['_method'];
-    _settings: TParams['_settings'];
-    _headers_in: TParams['_headers_in'];
-    _headers_out: TParams['_headers_out'];
-    _query_in: TParams['_query_in'];
-    _query_out: TParams['_query_out'];
-    _params_in: TParams['_params_in'];
-    _params_out: TParams['_params_out'];
-    _body_in: TParams['_body_in'];
-    _body_out: TParams['_body_out'];
-    _output_in: TParams['_output_in'];
-    _output_out: TParams['_output_out'];
+    _method: TParams["_method"];
+    _settings: TParams["_settings"];
+    _headers_in: TParams["_headers_in"];
+    _headers_out: TParams["_headers_out"];
+    _query_in: TParams["_query_in"];
+    _query_out: TParams["_query_out"];
+    _params_in: TParams["_params_in"];
+    _params_out: TParams["_params_out"];
+    _body_in: TParams["_body_in"];
+    _body_out: TParams["_body_out"];
+    _output_in: TParams["_output_in"];
+    _output_out: TParams["_output_out"];
   }>;
 
   method<M extends RestMethod>(
     path: M
   ): RouteBuilder<{
-    _path: TParams['_path'];
+    _path: TParams["_path"];
     _method: M;
-    _settings: TParams['_settings'];
-    _headers_in: TParams['_headers_in'];
-    _headers_out: TParams['_headers_out'];
-    _query_in: TParams['_query_in'];
-    _query_out: TParams['_query_out'];
-    _params_in: TParams['_params_in'];
-    _params_out: TParams['_params_out'];
-    _body_in: TParams['_body_in'];
-    _body_out: TParams['_body_out'];
-    _output_in: TParams['_output_in'];
-    _output_out: TParams['_output_out'];
+    _settings: TParams["_settings"];
+    _headers_in: TParams["_headers_in"];
+    _headers_out: TParams["_headers_out"];
+    _query_in: TParams["_query_in"];
+    _query_out: TParams["_query_out"];
+    _params_in: TParams["_params_in"];
+    _params_out: TParams["_params_out"];
+    _body_in: TParams["_body_in"];
+    _body_out: TParams["_body_out"];
+    _output_in: TParams["_output_in"];
+    _output_out: TParams["_output_out"];
   }>;
 
   settings<C extends RouteSettings>(
     settings: C
   ): RouteBuilder<{
-    _path: TParams['_path'];
-    _method: TParams['_method'];
+    _path: TParams["_path"];
+    _method: TParams["_method"];
     _settings: C;
-    _headers_in: TParams['_headers_in'];
-    _headers_out: TParams['_headers_out'];
-    _query_in: TParams['_query_in'];
-    _query_out: TParams['_query_out'];
-    _params_in: TParams['_params_in'];
-    _params_out: TParams['_params_out'];
-    _body_in: TParams['_body_in'];
-    _body_out: TParams['_body_out'];
-    _output_in: TParams['_output_in'];
-    _output_out: TParams['_output_out'];
+    _headers_in: TParams["_headers_in"];
+    _headers_out: TParams["_headers_out"];
+    _query_in: TParams["_query_in"];
+    _query_out: TParams["_query_out"];
+    _params_in: TParams["_params_in"];
+    _params_out: TParams["_params_out"];
+    _body_in: TParams["_body_in"];
+    _body_out: TParams["_body_out"];
+    _output_in: TParams["_output_in"];
+    _output_out: TParams["_output_out"];
   }>;
 
   headers<$Parser extends Parser>(
     parser: $Parser
   ): RouteBuilder<{
-    _path: TParams['_path'];
-    _method: TParams['_method'];
-    _settings: TParams['_settings'];
-    _headers_in: inferParser<$Parser>['in'];
-    _headers_out: inferParser<$Parser>['out'];
-    _query_in: TParams['_query_in'];
-    _query_out: TParams['_query_out'];
-    _params_in: TParams['_params_in'];
-    _params_out: TParams['_params_out'];
-    _body_in: TParams['_body_in'];
-    _body_out: TParams['_body_out'];
-    _output_in: TParams['_output_in'];
-    _output_out: TParams['_output_out'];
+    _path: TParams["_path"];
+    _method: TParams["_method"];
+    _settings: TParams["_settings"];
+    _headers_in: inferParser<$Parser>["in"];
+    _headers_out: inferParser<$Parser>["out"];
+    _query_in: TParams["_query_in"];
+    _query_out: TParams["_query_out"];
+    _params_in: TParams["_params_in"];
+    _params_out: TParams["_params_out"];
+    _body_in: TParams["_body_in"];
+    _body_out: TParams["_body_out"];
+    _output_in: TParams["_output_in"];
+    _output_out: TParams["_output_out"];
   }>;
 
   query<$Parser extends Parser>(
     parser: $Parser
   ): RouteBuilder<{
-    _path: TParams['_path'];
-    _method: TParams['_method'];
-    _settings: TParams['_settings'];
-    _headers_in: TParams['_headers_in'];
-    _headers_out: TParams['_headers_out'];
-    _query_in: inferParser<$Parser>['in'];
-    _query_out: inferParser<$Parser>['out'];
-    _params_in: TParams['_params_in'];
-    _params_out: TParams['_params_out'];
-    _body_in: TParams['_body_in'];
-    _body_out: TParams['_body_out'];
-    _output_in: TParams['_output_in'];
-    _output_out: TParams['_output_out'];
+    _path: TParams["_path"];
+    _method: TParams["_method"];
+    _settings: TParams["_settings"];
+    _headers_in: TParams["_headers_in"];
+    _headers_out: TParams["_headers_out"];
+    _query_in: inferParser<$Parser>["in"];
+    _query_out: inferParser<$Parser>["out"];
+    _params_in: TParams["_params_in"];
+    _params_out: TParams["_params_out"];
+    _body_in: TParams["_body_in"];
+    _body_out: TParams["_body_out"];
+    _output_in: TParams["_output_in"];
+    _output_out: TParams["_output_out"];
   }>;
 
   params<$Parser extends Parser>(
     parser: $Parser
   ): RouteBuilder<{
-    _path: TParams['_path'];
-    _method: TParams['_method'];
-    _settings: TParams['_settings'];
-    _headers_in: TParams['_headers_in'];
-    _headers_out: TParams['_headers_out'];
-    _query_in: TParams['_query_in'];
-    _query_out: TParams['_query_out'];
-    _params_in: inferParser<$Parser>['in'];
-    _params_out: inferParser<$Parser>['out'];
-    _body_in: TParams['_body_in'];
-    _body_out: TParams['_body_out'];
-    _output_in: TParams['_output_in'];
-    _output_out: TParams['_output_out'];
+    _path: TParams["_path"];
+    _method: TParams["_method"];
+    _settings: TParams["_settings"];
+    _headers_in: TParams["_headers_in"];
+    _headers_out: TParams["_headers_out"];
+    _query_in: TParams["_query_in"];
+    _query_out: TParams["_query_out"];
+    _params_in: inferParser<$Parser>["in"];
+    _params_out: inferParser<$Parser>["out"];
+    _body_in: TParams["_body_in"];
+    _body_out: TParams["_body_out"];
+    _output_in: TParams["_output_in"];
+    _output_out: TParams["_output_out"];
   }>;
 
   body<$Parser extends Parser>(
     parser: $Parser
   ): RouteBuilder<{
-    _path: TParams['_path'];
-    _method: TParams['_method'];
-    _settings: TParams['_settings'];
-    _headers_in: TParams['_headers_in'];
-    _headers_out: TParams['_headers_out'];
-    _query_in: TParams['_query_in'];
-    _query_out: TParams['_query_out'];
-    _params_in: TParams['_params_in'];
-    _params_out: TParams['_params_out'];
-    _body_in: inferParser<$Parser>['in'];
-    _body_out: inferParser<$Parser>['out'];
-    _output_in: TParams['_output_in'];
-    _output_out: TParams['_output_out'];
+    _path: TParams["_path"];
+    _method: TParams["_method"];
+    _settings: TParams["_settings"];
+    _headers_in: TParams["_headers_in"];
+    _headers_out: TParams["_headers_out"];
+    _query_in: TParams["_query_in"];
+    _query_out: TParams["_query_out"];
+    _params_in: TParams["_params_in"];
+    _params_out: TParams["_params_out"];
+    _body_in: inferParser<$Parser>["in"];
+    _body_out: inferParser<$Parser>["out"];
+    _output_in: TParams["_output_in"];
+    _output_out: TParams["_output_out"];
   }>;
 
   output<$Parser extends Parser>(
     parser: $Parser
   ): RouteBuilder<{
-    _path: TParams['_path'];
-    _method: TParams['_method'];
-    _settings: TParams['_settings'];
-    _headers_in: TParams['_headers_in'];
-    _headers_out: TParams['_headers_out'];
-    _query_in: TParams['_query_in'];
-    _query_out: TParams['_query_out'];
-    _params_in: TParams['_params_in'];
-    _params_out: TParams['_params_out'];
-    _body_in: TParams['_body_in'];
-    _body_out: TParams['_body_out'];
-    _output_in: inferParser<$Parser>['in'];
-    _output_out: inferParser<$Parser>['out'];
+    _path: TParams["_path"];
+    _method: TParams["_method"];
+    _settings: TParams["_settings"];
+    _headers_in: TParams["_headers_in"];
+    _headers_out: TParams["_headers_out"];
+    _query_in: TParams["_query_in"];
+    _query_out: TParams["_query_out"];
+    _params_in: TParams["_params_in"];
+    _params_out: TParams["_params_out"];
+    _body_in: TParams["_body_in"];
+    _body_out: TParams["_body_out"];
+    _output_in: inferParser<$Parser>["in"];
+    _output_out: inferParser<$Parser>["out"];
   }>;
 }
 
 export type AnyRouteBuilder = RouteBuilder<RouteParams>;
 
-function createNewBuilder(d1: AnyRouteBuilderDef, d2: Partial<AnyRouteBuilderDef>) {
+function createNewBuilder(
+  d1: AnyRouteBuilderDef,
+  d2: Partial<AnyRouteBuilderDef>
+) {
   return createBuilder({
     ...d1,
     ...d2,
   });
 }
 
-export function createBuilder<TParams extends RouteParams>(init: RouteBuilderDef<TParams>): RouteBuilder<TParams> {
+export function createBuilder<TParams extends RouteParams>(
+  init: RouteBuilderDef<TParams>
+): RouteBuilder<TParams> {
   const _def: AnyRouteBuilderDef = {
     ...init,
     settings: init.settings ?? {
@@ -267,18 +273,18 @@ export function createRoute<TParams extends RouteParams, N extends string>(
   path: N
 ): RouteBuilder<{
   _path: N;
-  _method: TParams['_method'];
-  _settings: TParams['_settings'];
-  _headers_in: TParams['_headers_in'];
-  _headers_out: TParams['_headers_out'];
-  _query_in: TParams['_query_in'];
-  _query_out: TParams['_query_out'];
-  _params_in: TParams['_params_in'];
-  _params_out: TParams['_params_out'];
-  _body_in: TParams['_body_in'];
-  _body_out: TParams['_body_out'];
-  _output_in: TParams['_output_in'];
-  _output_out: TParams['_output_out'];
+  _method: TParams["_method"];
+  _settings: TParams["_settings"];
+  _headers_in: TParams["_headers_in"];
+  _headers_out: TParams["_headers_out"];
+  _query_in: TParams["_query_in"];
+  _query_out: TParams["_query_out"];
+  _params_in: TParams["_params_in"];
+  _params_out: TParams["_params_out"];
+  _body_in: TParams["_body_in"];
+  _body_out: TParams["_body_out"];
+  _output_in: TParams["_output_in"];
+  _output_out: TParams["_output_out"];
 }> {
   const builder = createBuilder<TParams>({});
   return builder.path(path);
@@ -294,32 +300,32 @@ export type AnyRoute = AnyRouteBuilder;
 export function prefixer<P extends string>(prefix: P) {
   const fn = <TParams extends RouteParams, N extends string>(path: N) => {
     const builder = createRoute<TParams, `${P}${N}`>(path as `${P}${N}`);
-    return builder.path(`${prefix}${path}`).method('GET');
+    return builder.path(`${prefix}${path}`).method("GET");
   };
   fn.get = <TParams extends RouteParams, N extends string>(path: N) => {
     const builder = createRoute<TParams, `${P}${N}`>(path as `${P}${N}`);
-    return builder.path(`${prefix}${path}`).method('GET');
-  }
+    return builder.path(`${prefix}${path}`).method("GET");
+  };
   fn.post = <TParams extends RouteParams, N extends string>(path: N) => {
     const builder = createRoute<TParams, `${P}${N}`>(path as `${P}${N}`);
-    return builder.path(`${prefix}${path}`).method('POST');
-  }
+    return builder.path(`${prefix}${path}`).method("POST");
+  };
   fn.patch = <TParams extends RouteParams, N extends string>(path: N) => {
     const builder = createRoute<TParams, `${P}${N}`>(path as `${P}${N}`);
-    return builder.path(`${prefix}${path}`).method('PATCH');
-  }
+    return builder.path(`${prefix}${path}`).method("PATCH");
+  };
   fn.put = <TParams extends RouteParams, N extends string>(path: N) => {
     const builder = createRoute<TParams, `${P}${N}`>(path as `${P}${N}`);
-    return builder.path(`${prefix}${path}`).method('PUT');
-  }
+    return builder.path(`${prefix}${path}`).method("PUT");
+  };
   fn.delete = <TParams extends RouteParams, N extends string>(path: N) => {
     const builder = createRoute<TParams, `${P}${N}`>(path as `${P}${N}`);
-    return builder.path(`${prefix}${path}`).method('DELETE');
-  }
+    return builder.path(`${prefix}${path}`).method("DELETE");
+  };
   return fn;
 }
 
 /**
  * Route function maker providing shorthand methods for each HTTP method.
  */
-export const route = prefixer('');
+export const route = prefixer("");
