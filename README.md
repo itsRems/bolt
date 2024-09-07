@@ -100,12 +100,134 @@ const response = await router.myRoute({
 console.log(response.message); // Hello Nico!
 ```
 
-# Query encoding
+# Advanced usage
+
+## Modules
+
+When working with large projects, it can be useful to split your routers into multiple modules or even separate packages. Bolt provides a `BoltModule` class that can be used to create modules that can be attached to a BoltServer.
+
+#### Detached modules
+
+Detached modules are the most modular way to use Bolt. They can be used to create standalone modules that can separately be attached to a BoltServer.
+
+Here's an example of what using detached modules might look like:
+
+```typescript
+import { BoltServer, BoltModule, createRouter, route } from '@bolt-ts/fastify';
+import { z } from 'zod';
+import fastify from 'fastify';
+
+// Sample router
+const myRouter = createRouter({
+  myRoute: route.post('/hello')
+    .body(z.object({
+      name: z.string()
+    }))
+    .output(z.object({
+      message: z.string()
+    }))
+})
+
+const app = fastify();
+
+const boltServer = new BoltServer(app);
+
+// Create a module
+const myModule = new BoltModule(myRouter, server);
+
+// We can now add handlers to the module
+myModule.registerHandlers({
+  myRoute: async (req, res) => {
+    return {
+      message: `Hello ${req.body.name}!`
+    }
+  }
+});
+
+// Attach the module to the server
+server.addDetachedModule(myModule);
+
+async function start() {
+  // Attach the bolt routes to the fastify server
+  boltServer.attachRoutes();
+
+  // Start the server
+  await app.listen({
+    port: 3000,
+  });
+}
+
+start();
+```
+
+#### "Attached" modules
+
+You can also skip creating a standalone module by adding a module directly to a BoltServer. This is useful for smaller projects where you want to keep your modules together.
+
+Here's an example of what using attached modules might look like:
+
+```typescript
+import { BoltServer, createRouter, route } from '@bolt-ts/fastify';
+import { z } from 'zod';
+import fastify from 'fastify';
+
+// Sample router
+const myRouter = createRouter({
+  myRoute: route.post('/hello')
+    .body(z.object({
+      name: z.string()
+    }))
+    .output(z.object({
+      message: z.string()
+    }))
+})
+
+const app = fastify();
+
+const boltServer = new BoltServer(app);
+
+// Create a module
+const myModule = boltServer.addModule(myRouter);
+
+// We can now add handlers to the module
+myModule.registerHandlers({
+  myRoute: async (req, res) => {
+    return {
+      message: `Hello ${req.body.name}!`
+    }
+  }
+});
+
+// Attach the module to the server
+server.addDetachedModule(myModule);
+
+async function start() {
+  // Attach the bolt routes to the fastify server
+  boltServer.attachRoutes();
+
+  // Start the server
+  await app.listen({
+    port: 3000,
+  });
+}
+
+start();
+```
+
+
+In the real world, you'd probably have a file/package per router/module.
+ 
+📝 For extremely large projects, I recommend using a dedicated package per router, as well as a dedicated module package to register your handlers.
+
+## Query encoding
 
 Bolt ships out of the box with support for two query encoding strategies:
 
-- `string-indexed-keys`: This is the default encoding strategy used by Bolt. It uses bracket notation to encode nested objects and arrays. For example, the query `{ foo: { bar: 'baz' } }` will be encoded as `foo[bar]=baz`.
-- `string-repeated-keys`: This encoding strategy is useful when you want to encode arrays as query parameters. For example, the query `{ foo: ['bar', 'baz'] }` will be encoded as `foo=bar&foo=baz`.
+encoder | description | example
+--- | --- | ---
+`string-indexed-keys` | This is the default encoding strategy used by Bolt. It uses bracket notation to encode nested objects and arrays. | `{ foo: { bar: 'baz' } }` => `foo[bar]=baz`
+`string-repeated-keys` | This encoding strategy is useful when you want to encode arrays as query parameters. | `{ foo: ['bar', 'baz'] }` => `foo=bar&foo=baz`
+
 
 You can specify the encoding strategy when defining your routes:
 
