@@ -14,7 +14,7 @@
 		"build": "lerna run build",
 		"dev": "lerna watch -- lerna run build --since",
 		"prereleaseOnly": "pinst --disable && echo '🚀  Publishing...'",
-		"release-stable": "lerna run build && lerna publish --no-private --preid canary --yes --force-publish",
+		"release-stable": "lerna run build && lerna publish --preid canary --no-private --yes --force-publish",
 		"release-canary": "lerna run build && lerna publish --no-private --yes --canary --preid canary --force-publish",
 		"postrelease": "pinst --enable && echo '🎉  Published!'",
 		"copyreadme": "cp README.md packages/bolt-core/README.md && cp README.md packages/bolt-plexus/README.md && cp README.md packages/bolt-fastify/README.md"
