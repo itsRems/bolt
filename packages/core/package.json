@@ -1,6 +1,6 @@
 {
 	"name": "@bolt-ts/core",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"main": "./dist/index.js",
 	"types": "dist/index.d.ts",
 	"publishConfig": {
@@ -13,6 +13,6 @@
 		"dev": "tsc --watch"
 	},
 	"dependencies": {
-		"@bolt-ts/utils": "0.2.0"
+		"@bolt-ts/utils": "0.2.1"
 	}
 }
