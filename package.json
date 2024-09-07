@@ -31,7 +31,8 @@
 	},
 	"workspaces": {
 		"packages": [
-			"packages/*"
+			"packages/*",
+			"docs"
 		]
 	},
 	"publishConfig": {
