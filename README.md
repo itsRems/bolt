@@ -100,6 +100,33 @@ const response = await router.myRoute({
 console.log(response.message); // Hello Nico!
 ```
 
+# Query encoding
+
+Bolt ships out of the box with support for two query encoding strategies:
+
+- `string-indexed-keys`: This is the default encoding strategy used by Bolt. It uses bracket notation to encode nested objects and arrays. For example, the query `{ foo: { bar: 'baz' } }` will be encoded as `foo[bar]=baz`.
+- `string-repeated-keys`: This encoding strategy is useful when you want to encode arrays as query parameters. For example, the query `{ foo: ['bar', 'baz'] }` will be encoded as `foo=bar&foo=baz`.
+
+You can specify the encoding strategy when defining your routes:
+
+```typescript
+import { route } from '@bolt-ts/core';
+
+const myRoute = route('/hello')
+  // Define the input body schema
+  .body(z.object({
+    name: z.string()
+  }))
+  // Define the output body schema
+  .output(z.object({
+    message: z.string()
+  }))
+  // Specify the query encoding strategy
+  .settings({
+    queryEncoder: 'string-repeated-keys'
+  });
+```
+
 ## Alternatives
 
 - [TS-Rest](https://ts-rest.com/)
