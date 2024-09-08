@@ -9,6 +9,8 @@
 
 # Getting started
 
+📖 **[Documentation](https://bolt-ts.org)** (new 🥳)
+
 ## Installation
 
 > Core (required)
