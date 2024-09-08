@@ -7,7 +7,7 @@ on:
       - canary
       - feat/autopublish
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -19,6 +19,7 @@ jobs:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
       - name: Setup NPM authentication
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - run: yarn install --immutable
       - run: ${{ github.ref == 'refs/heads/main' && 'yarn release-stable' || 'yarn release-canary' }}
