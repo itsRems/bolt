@@ -13,22 +13,31 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      - name: Setup Repo
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
+
       - name: Setup NPM authentication
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-      - run: yarn install --immutable
 
-      # Ensure Lerna is using the correct version based on the git tag
-      - run: |
+      - name: Install Dependencies
+        run: yarn install --immutable
+
+      - name: Ensure version from tag
+        run: |
           git fetch --tags
           npx lerna version --yes --no-push --exact --force-publish
 
-      - run: yarn release-stable
+      - name: Publish stable
+        run: yarn release-stable
         if: github.ref == 'refs/heads/main'
-      - run: yarn release-canary
+
+      - name: Publish canary
+        run: yarn release-canary
         if: github.ref != 'refs/heads/main'
