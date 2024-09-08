@@ -29,6 +29,15 @@ jobs:
       - name: Install Dependencies
         run: yarn install --immutable
 
+      - name: Determine branch from tag
+        run: |
+          BRANCH=$(git branch -r --contains $GITHUB_SHA | grep -Eo 'origin/\S+' | sed 's|origin/||' | head -n 1)
+          echo "Branch is $BRANCH"
+          echo "BRANCH=$BRANCH" >> $GITHUB_ENV
+          
+      - name: Checkout branch
+        run: git checkout $BRANCH
+
       - name: Ensure version from tag
         run: |
           git fetch --tags
