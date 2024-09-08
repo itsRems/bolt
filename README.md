@@ -9,7 +9,7 @@
 
 # Getting started
 
-**[Documentation](https://bolt-ts.org)**
+📖 **[Documentation](https://bolt-ts.org)** (new 🥳)
 
 ## Installation
 
