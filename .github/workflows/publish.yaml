@@ -18,5 +18,7 @@ jobs:
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
+      - name: Setup NPM authentication
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - run: yarn install --immutable
       - run: ${{ github.ref == 'refs/heads/main' && 'yarn release-stable' || 'yarn release-canary' }}
