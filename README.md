@@ -254,3 +254,4 @@ const myRoute = route('/hello')
 ## Alternatives
 
 - [TS-Rest](https://ts-rest.com/)
+
