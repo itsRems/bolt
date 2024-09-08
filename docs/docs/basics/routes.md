@@ -13,7 +13,7 @@ They define the endpoints that your API will expose, as well as the input and ou
 
 To define a route, you'll need to use the `route` function from the `@bolt-ts/core` package. This function takes a single argument, which is the path of the route. The path can only be an absolute* string.
 
-_*: To help define routes in large projects, see [prefixers](/docs/basics/route#prefixers)._
+_*: To help define routes in large projects, see [prefixers](/docs/basics/routes#prefixers)._
 
 ```typescript
 import { route } from '@bolt-ts/core';
