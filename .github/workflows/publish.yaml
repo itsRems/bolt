@@ -22,6 +22,13 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - run: yarn install --immutable
-      - run: yarn build
-      - run: git diff
-      - run: ${{ github.ref == 'refs/heads/main' && 'yarn release-stable' || 'yarn release-canary' }}
+
+      # Ensure Lerna is using the correct version based on the git tag
+      - run: |
+          git fetch --tags
+          npx lerna version --yes --no-push --exact --force-publish
+
+      - run: yarn release-stable
+        if: github.ref == 'refs/heads/main'
+      - run: yarn release-canary
+        if: github.ref != 'refs/heads/main'
