@@ -31,10 +31,10 @@ jobs:
 
       - name: Determine branch from tag
         run: |
-          BRANCH=$(git branch -r --contains $GITHUB_SHA | grep -Eo 'origin/\S+' | sed 's|origin/||' | head -n 1)
+          BRANCH=$(git branch -r --contains $GITHUB_SHA | grep -Eo 'origin/\S+' | sed 's|origin/||' | head -n 1) || ${{ github.ref }}
           echo "Branch is $BRANCH"
           echo "BRANCH=$BRANCH" >> $GITHUB_ENV
-          
+
       - name: Checkout branch
         run: git checkout $BRANCH
 
