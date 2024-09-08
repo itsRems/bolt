@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - canary
+      - feat/autopublish
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,4 +19,4 @@ jobs:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
       - run: yarn install --immutable
-      - run: ${{ github.ref == 'refs/heads/main' && 'yarn release-stable' || 'yarn release-canary' }}
+      - run: ${{ github.ref == 'refs/heads/main' && 'yarn ci:release-stable' || 'yarn ci:release-canary' }}
