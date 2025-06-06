@@ -1,11 +1,13 @@
+# Preface
+
+💁 I strongly believe the problem I was trying to solve has been solved by the [oRPC](https://orpc.unnoq.com/) library. I likely won't keep updating bolt and will use oRPC for future projects. If you've ever given bolt a try, thanks !
+
 # Bolt TS - Modular, typed REST API framework for NodeJS
 
 [![npm version](https://badge.fury.io/js/@bolt-ts%2Fcore.svg)](https://badge.fury.io/js/@bolt-ts%2Fcore)
 ![npm monthly downloads](https://img.shields.io/npm/dw/@bolt-ts/core?style=flat)
 ![npm total downloads](https://img.shields.io/npm/dt/@bolt-ts/core?style=flat)
 ![bundle size](https://img.shields.io/bundlephobia/min/@bolt-ts/core?style=flat)
-
-> 💁 I strongly believe the problem I was trying to solve has been solved by the [oRPC](https://orpc.unnoq.com/) library. I likely won't keep updating bolt and will use oRPC for future projects. If you've ever given bolt a try, thanks !
 
 > Bolt is in early development. Expect breaking changes until v1.0.0, and use at your own risk.
 
