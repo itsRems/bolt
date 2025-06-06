@@ -1,6 +1,6 @@
 # Preface
 
-💁 I strongly believe the problem I was trying to solve has been solved by the [oRPC](https://orpc.unnoq.com/) library. I likely won't keep updating bolt and will use oRPC for future projects. If you've ever given bolt a try, thanks !
+💁 I strongly believe the problem I was trying to solve with bolt has been solved by the [oRPC](https://orpc.unnoq.com/) library. I likely won't keep updating bolt and will use oRPC for future projects. If you've ever given bolt a try, thanks !
 
 # Bolt TS - Modular, typed REST API framework for NodeJS
 
